@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>maket.app.client</groupId>
+    <artifactId>AppSupermaketSales</artifactId>
+    <version>1.0</version>
+    <packaging>jar</packaging>
+    
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>15</maven.compiler.source>
+        <maven.compiler.target>15</maven.compiler.target>
+        <exec.mainClass>market.app.client.MarketAppClient</exec.mainClass>
+    </properties>
+    
+    <build>
+        <resources>
+            <resource>
+                <directory>src/resources</directory>
+            </resource>
+        </resources>
+       
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <archive>
+                        <index>true</index>
+                        <manifest>
+                            <mainClass>market.app.client.MarketAppClient</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/com.formdev/flatlaf -->
+        <dependency>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf</artifactId>
+            <version>2.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>6.1.4.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>com.iuh.market</groupId>
+            <artifactId>entity-server</artifactId>
+            <version>1.1</version>
+        </dependency>
+        
+        <!--export file pdf-->
+        <!-- always needed -->     
+        <dependency>         
+            <groupId>com.itextpdf</groupId>         
+            <artifactId>kernel</artifactId>         
+            <version>7.1.9</version>     
+        </dependency>  
+      
+        <dependency>         
+            <groupId>com.itextpdf</groupId>         
+            <artifactId>io</artifactId>         
+            <version>7.1.9</version>     
+        </dependency>  
+      
+        <dependency>         
+            <groupId>com.itextpdf</groupId>         
+            <artifactId>layout</artifactId>         
+            <version>7.1.9</version>
+        </dependency>  
+      
+        <dependency>         
+            <groupId>com.itextpdf</groupId>         
+            <artifactId>forms</artifactId>         
+            <version>7.1.9</version>    
+        </dependency>  
+      
+        <dependency>         
+            <groupId>com.itextpdf</groupId>         
+            <artifactId>pdfa</artifactId>         
+            <version>7.1.9</version>     
+        </dependency>  
+      
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>4.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>4.1.2</version>
+        </dependency>
+
+        <!--        <dependency>         
+            <groupId>com.itextpdf</groupId>         
+            <artifactId>sign</artifactId>         
+            <version>7.1.9</version>     
+        </dependency>  
+      
+        <dependency>         
+            <groupId>com.itextpdf</groupId>         
+            <artifactId>barcodes</artifactId>         
+            <version>7.1.9</version>     
+        </dependency>  
+      
+        <dependency>         
+            <groupId>com.itextpdf</groupId>         
+            <artifactId>font-asian</artifactId>         
+            <version>7.0.2</version>     
+        </dependency>  
+      
+        <dependency>         
+            <groupId>com.itextpdf</groupId>         
+            <artifactId>hyph</artifactId>         
+            <version>7.0.2</version>    
+        </dependency> -->
+    </dependencies>
+    <name>AppSupermaketSales</name>
+</project>
