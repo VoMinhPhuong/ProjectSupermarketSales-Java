@@ -13,10 +13,7 @@ import market.app.client.ui.manager.frmMenuManager;
 import market.app.client.ui.staff.frmMenuStaff;
 import service.IAccountService;
 
-/**
- *
- * @author Le Tuan
- */
+
 public class frmLogin extends javax.swing.JFrame {
 
     private IAccountService accountService;

@@ -20,10 +20,6 @@ import market.app.client.Config;
 import market.app.client.connect.ConnectServer;
 import service.IProductTypeService;
 
-/**
- *
- * @author Le Tuan
- */
 public class frmItemType extends javax.swing.JFrame {
 
     /**

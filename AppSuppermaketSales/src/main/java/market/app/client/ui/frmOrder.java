@@ -16,10 +16,6 @@ import market.app.client.connect.ConnectServer;
 import service.IOrderDetailService;
 import service.IOrderService;
 
-/**
- *
- * @author Le Tuan
- */
 public class frmOrder extends javax.swing.JFrame {
 
     private List<OrderDetail> _details;
@@ -99,7 +95,7 @@ public class frmOrder extends javax.swing.JFrame {
 
         lblMarketName.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblMarketName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblMarketName.setText("Siêu thị Kmart");
+        lblMarketName.setText("Hóa Đơn");
 
         lblAddress.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblAddress.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -117,7 +113,7 @@ public class frmOrder extends javax.swing.JFrame {
 
         lblDateTime.setText("Ngày: 25-08-2022 18:00:00");
 
-        lblStaffName.setText("Bán hàng: Lê Tuấn");
+        lblStaffName.setText("Bán hàng: Minh Phương");
 
         pnOrderDetailInOrder.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(69, 123, 157), 3, true), "Danh sách mặt hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 

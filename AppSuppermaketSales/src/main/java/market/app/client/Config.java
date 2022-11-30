@@ -50,10 +50,6 @@ import market.app.client.ui.manager.frmManageItem;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-/**
- *
- * @author Le Tuan
- */
 // Variables and functions use in app
 public class Config {
 
@@ -204,7 +200,7 @@ public class Config {
 					return false;
 				}
 			}
-			String dest = "C:/k-mart/orders/" + Config.converDateToString(now).replace(":", "_") + ".pdf";
+			String dest = "C:/suppermarket/orders/" + Config.converDateToString(now).replace(":", "_") + ".pdf";
 			PdfWriter writer = new PdfWriter(dest);
 
 			PdfDocument pdfDocument = new PdfDocument(writer);

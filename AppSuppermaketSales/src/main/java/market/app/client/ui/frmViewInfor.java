@@ -8,10 +8,6 @@ import entity.Account;
 import entity.Staff;
 import market.app.client.Config;
 
-/**
- *
- * @author Le Tuan
- */
 public class frmViewInfor extends javax.swing.JInternalFrame {
 
     private Account _account;

@@ -12,10 +12,6 @@ import javax.swing.JOptionPane;
 import market.app.client.connect.ConnectServer;
 import service.IAccountService;
 
-/**
- *
- * @author Bao Tran
- */
 public class frmForgotPassword extends javax.swing.JFrame {
 
     private IAccountService accountService = null;

@@ -17,10 +17,7 @@ import javax.swing.JOptionPane;
 import market.app.client.Config;
 import market.app.client.ui.frmLogin;
 
-/**
- *
- * @author Le Tuan
- */
+
 public class frmMenuStaff extends javax.swing.JFrame {
 
     private Account _account;

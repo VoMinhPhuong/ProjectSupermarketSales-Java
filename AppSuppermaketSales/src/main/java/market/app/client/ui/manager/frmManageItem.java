@@ -27,10 +27,6 @@ import market.app.client.connect.ConnectServer;
 import service.IProductService;
 import service.IProductTypeService;
 
-/**
- *
- * @author Le Tuan
- */
 public class frmManageItem extends javax.swing.JInternalFrame {
 
     /**

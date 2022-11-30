@@ -103,7 +103,7 @@
           <Font name="Segoe UI" size="24" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Si&#xea;u th&#x1ecb; Kmart"/>
+        <Property name="text" type="java.lang.String" value="H&#xf3;a &#x110;&#x1a1;n"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblAddress">
@@ -145,7 +145,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblStaffName">
       <Properties>
-        <Property name="text" type="java.lang.String" value="B&#xe1;n h&#xe0;ng: L&#xea; Tu&#x1ea5;n"/>
+        <Property name="text" type="java.lang.String" value="B&#xe1;n h&#xe0;ng: Minh Ph&#x1b0;&#x1a1;ng"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JPanel" name="pnOrderDetailInOrder">
