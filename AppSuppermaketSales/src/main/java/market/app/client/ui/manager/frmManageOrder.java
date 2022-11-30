@@ -681,13 +681,13 @@ public class frmManageOrder extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
        try {
             if (tblOrderList.getRowCount() > 0) {
-            String path = "C:/supermatket/reports/report_" + txtDateStart.getText() + "_" + txtDateEnd.getText() + ".xlsx";
+            String path = "C:/suppermarket/reports/report_" + txtDateStart.getText() + "_" + txtDateEnd.getText() + ".xlsx";
             exportReport(tblOrderList, path);
         }else {
             JOptionPane.showMessageDialog(null, "Không có hóa đơn nào để xuất báo cáo!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
         }
        } catch(Exception ex) {
-           JOptionPane.showMessageDialog(this, "Vui lòng tạo folder supermatket/reports trong ổ đĩa C!", "Thông báo", JOptionPane.ERROR_MESSAGE);
+           JOptionPane.showMessageDialog(this, "Vui lòng tạo folder suppermarket/reports trong ổ đĩa C!", "Thông báo", JOptionPane.ERROR_MESSAGE);
            ex.printStackTrace();
        }
     }//GEN-LAST:event_btnExportActionPerformed
