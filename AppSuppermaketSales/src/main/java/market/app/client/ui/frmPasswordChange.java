@@ -9,10 +9,6 @@ import javax.swing.JOptionPane;
 import market.app.client.connect.ConnectServer;
 import service.IAccountService;
 
-/**
- *
- * @author Le Tuan
- */
 public class frmPasswordChange extends javax.swing.JFrame {
 
     private Account _account;

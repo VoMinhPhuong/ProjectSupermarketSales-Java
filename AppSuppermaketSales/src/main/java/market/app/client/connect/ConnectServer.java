@@ -17,10 +17,6 @@ import service.IProductService;
 import service.IProductTypeService;
 import service.IStaffService;
 
-/**
- *
- * @author Le Tuan
- */
 public class ConnectServer {
 
     private static ConnectServer instance;

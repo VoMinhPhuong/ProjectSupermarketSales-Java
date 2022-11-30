@@ -19,10 +19,7 @@ import market.app.client.connect.ConnectServer;
 import service.IAccountService;
 import service.IStaffService;
 
-/**
- *
- * @author Le Tuan
- */
+
 public class frmManageStaff extends javax.swing.JInternalFrame {
 
     /**

@@ -21,10 +21,6 @@ import market.app.client.connect.ConnectServer;
 import market.app.client.ui.frmOrder;
 import service.IProductService;
 
-/**
- *
- * @author Le Tuan
- */
 public class frmSale extends javax.swing.JInternalFrame {
 
     private IProductService productService;

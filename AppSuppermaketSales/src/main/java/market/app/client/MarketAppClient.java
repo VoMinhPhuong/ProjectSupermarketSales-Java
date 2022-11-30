@@ -7,10 +7,6 @@ package market.app.client;
 
 import market.app.client.connect.ConnectServer;
 
-/**
- *
- * @author Le Tuan
- */
 public class MarketAppClient {
 
     public static void main(String[] args) {

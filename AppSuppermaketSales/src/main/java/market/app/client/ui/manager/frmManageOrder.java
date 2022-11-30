@@ -28,10 +28,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import service.IOrderDetailService;
 import service.IOrderService;
 
-/**
- *
- * @author Le Tuan
- */
+
 public class frmManageOrder extends javax.swing.JInternalFrame {
 
     private List<OrderDetail> _details;
