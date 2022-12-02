@@ -2,22 +2,20 @@ package entity;
 
 import java.io.Serializable;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import javax.persistence.*;
+
+import org.bson.types.ObjectId;
 
 @Entity
 @Table(name = "product_types")
 public class ProductType implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name = "product_type_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private ObjectId id;
 
 	@Column(name = "type_name", nullable = false, columnDefinition = "nvarchar(255)")
 	private String name;
@@ -39,11 +37,11 @@ public class ProductType implements Serializable {
 		super();
 	}
 
-	public int getId() {
+	public ObjectId getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(ObjectId id) {
 		this.id = id;
 	}
 
@@ -73,7 +71,7 @@ public class ProductType implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ProductType [id=" + id + ", name=" + name + ", unit=" + unit + "]";
+		return "ProductType [id=" + id + ", name=" + name + ", unit=" + unit + ", isSelling=" + isSelling + "]";
 	}
 
 }

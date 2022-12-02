@@ -71,7 +71,7 @@ public class frmManageItem extends javax.swing.JInternalFrame {
         List<Product> list = new ArrayList<>();
         try {
             for (Product pt : productService.getAllProduct()) {
-                Product prod = productService.findProductById(pt.getId());
+                Product prod = productService.findProductById(pt.getId().toString());
                 if (prod.getType().isSelling()) {
                     list.add(prod);
                 }
@@ -509,7 +509,7 @@ public class frmManageItem extends javax.swing.JInternalFrame {
             // add product
             for (ProductType proType : productTypeService.getAllProductType()) {
                 if (productTypeName.equals(proType.getName()) && productUnit.equals(proType.getUnit())) {
-                    ProductType productType = productTypeService.findProductTypeById(proType.getId());
+                    ProductType productType = productTypeService.findProductTypeById(proType.getId().toString());
 
                     Product product = new Product(productName, number, price, productType);
 

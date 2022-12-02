@@ -57,10 +57,11 @@ public class frmSale extends javax.swing.JInternalFrame {
     //handle input value change
     private void handleGiveInput(JTextField field) {
         try {
-            int id = Integer.parseInt(field.getText());
+            String id = field.getText();
             try {
                 Product product = productService.findProductById(id);
-                if (product != null && product.getType().isSelling()) {
+                 System.out.println("product"+product);
+                if (product != null && product.getType().isSelling() == true) {
                     txtItemName.setText(product.getName());
                     txtNumber.setEditable(true);
                     btnConfirm.setEnabled(false);
@@ -82,7 +83,7 @@ public class frmSale extends javax.swing.JInternalFrame {
     private void handleInputNumber(JTextField field) {
         try {
             int number = Integer.parseInt(field.getText());
-            Product product = productService.findProductById(Integer.parseInt(txtItemID.getText()));
+            Product product = productService.findProductById(txtItemID.getText());
             if (number > 0) {
                 if (number <= product.getNumber()) {
                     btnConfirm.setEnabled(true);
@@ -145,7 +146,7 @@ public class frmSale extends javax.swing.JInternalFrame {
     //check order detail exists then update quatity
     public static OrderDetail isExist(List<OrderDetail> details, Product product, int number) {
         for (OrderDetail detail : details) {
-            if (detail.getProduct().getId() == product.getId()) {
+            if (detail.getProduct().getId().toString().equals(product.getId().toString()) ) {
                 detail.setQuantity(detail.getQuantity() + number);
 
                 return detail;
@@ -428,7 +429,7 @@ public class frmSale extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCreateOrderActionPerformed
 
     private void btnConfirmActionPerformed(ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
-        int id = Integer.parseInt(txtItemID.getText());
+        String id = txtItemID.getText();
         try {
             int number = Integer.parseInt(txtNumber.getText());
             try {

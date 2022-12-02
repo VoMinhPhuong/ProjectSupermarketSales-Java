@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import db.MyEMFactory;
+import entity.Order;
 import entity.Staff;
 import service.IStaffService;
 
@@ -40,8 +41,7 @@ public class StaffDAO extends UnicastRemoteObject implements IStaffService {
 		Transaction transaction = session.getTransaction();
 		try {
 			transaction.begin();
-			session.saveOrUpdate(staff);
-//			session.flush();
+			session.merge(staff);
 			transaction.commit();
 			return true;
 		} catch (Exception e) {
@@ -55,7 +55,7 @@ public class StaffDAO extends UnicastRemoteObject implements IStaffService {
 	public List<Staff> getAllStaff() throws Exception {
 		Session session = factory.openSession();
 		try {
-			List<Staff> entities = session.createNativeQuery("SELECT * " + "FROM staffs ", Staff.class).list();
+			List<Staff> entities = session.createNativeQuery("db.staffs.find({})", Staff.class).list();
 			return entities;
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -291,7 +291,7 @@ public class frmOrder extends javax.swing.JFrame {
     private void btnPaySuccessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPaySuccessActionPerformed
         try {
             Order _order = new Order(now, _account.getStaff());
-            int orderId = orderService.addOrUpdateOrder(_order);
+            String orderId = orderService.addOrUpdateOrder(_order).toString();
             Order orderFinded = orderService.findOrderById(orderId);
             updateOrderIdAndInsertOrderDetail(_details, orderFinded);
         } catch (Exception e) {

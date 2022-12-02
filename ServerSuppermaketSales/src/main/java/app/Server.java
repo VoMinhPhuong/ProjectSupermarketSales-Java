@@ -1,5 +1,6 @@
 package app;
 
+import java.rmi.Naming;
 import java.rmi.registry.LocateRegistry;
 import java.util.Hashtable;
 
@@ -22,9 +23,10 @@ import service.impl.StaffServiceImpl;
 
 public class Server {
 	public static void main(String[] args) {
+
 		try {
 			Hashtable<String, String> hashtable = new Hashtable<String, String>();
-			hashtable.put("java.sercurity.policy", "policy.policy");
+			hashtable.put("java.security.policy", "policy.policy");
 			Context context = new InitialContext(hashtable);
 			LocateRegistry.createRegistry(8989);
 			
@@ -38,12 +40,12 @@ public class Server {
 			
 			//init path rmi
 			
-			context.bind("rmi://localhost:8989/IOrderService", orderService);
-			context.bind("rmi://localhost:8989/IAccountService", accountService);
-			context.bind("rmi://localhost:8989/IOrderDetailService", orderDetailService);
-			context.bind("rmi://localhost:8989/IProductService", productService);
-			context.bind("rmi://localhost:8989/IProductTypeService", productTypeService);
-			context.bind("rmi://localhost:8989/IStaffService", staffService);
+			Naming.bind("rmi://localhost:8989/IOrderService", orderService);
+			Naming.bind("rmi://localhost:8989/IAccountService", accountService);
+			Naming.bind("rmi://localhost:8989/IOrderDetailService", orderDetailService);
+			Naming.bind("rmi://localhost:8989/IProductService", productService);
+			Naming.bind("rmi://localhost:8989/IProductTypeService", productTypeService);
+			Naming.bind("rmi://localhost:8989/IStaffService", staffService);
 			System.out.println("Server Start PORT 8989 ...");
 		} catch (Exception e) {
 			e.printStackTrace();

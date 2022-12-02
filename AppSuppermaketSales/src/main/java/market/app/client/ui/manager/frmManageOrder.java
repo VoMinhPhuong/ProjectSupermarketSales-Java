@@ -77,11 +77,14 @@ public class frmManageOrder extends javax.swing.JInternalFrame {
     private List<Order> getAllOrderNowFromServer() {
         List<Order> orders = new ArrayList<>();
         String dateNow = Config.convertDateToStringSql(new Date());
+        System.out.println("dateNow" + dateNow);
         try {
             orderService.getAllOrderDateNow(dateNow).forEach(order -> {
+               
                 try {
-                    //System.err.println(order);
-                    orders.add(orderService.findOrderById(order.getId()));
+                     
+                    orders.add(orderService.findOrderById(order.getId().toString()));
+                    System.out.println("order" + orders);
                 } catch (Exception ex) {
                     System.err.println("Lỗi đọc hóa đơn!");
                     Logger.getLogger(frmManageOrder.class.getName()).log(Level.SEVERE, null, ex);
@@ -100,7 +103,7 @@ public class frmManageOrder extends javax.swing.JInternalFrame {
         try {
             orders.forEach(order -> {
                 try {
-                    Order _order = orderService.findOrderById(order.getId());
+                    Order _order = orderService.findOrderById(order.getId().toString());
                     if (_order != null) {
                         //System.err.println(_order.getDetails());
                         __orders.add(_order);
@@ -592,7 +595,7 @@ public class frmManageOrder extends javax.swing.JInternalFrame {
             modelTableOrderDetail.setRowCount(0);
             Order order = _orders.get(index);
             try {
-                _details = orderService.findOrderById(order.getId()).getDetails();
+                _details = orderService.findOrderById(order.getId().toString()).getDetails();
                 loadDataToOrderDetailList(_details);
             } catch (Exception ex) {
                 Logger.getLogger(frmManageOrder.class.getName()).log(Level.SEVERE, null, ex);
@@ -608,7 +611,7 @@ public class frmManageOrder extends javax.swing.JInternalFrame {
         String _text = txtSearch.getText().trim();
         if (!_text.equals("")) {
         	try {
-				int orderId = Integer.parseInt(_text);
+				String orderId = _text;
 				Order order =  orderService.findOrderById(orderId);
 				if(order != null) {
 					_orders = Arrays.asList(order);
@@ -714,7 +717,7 @@ public class frmManageOrder extends javax.swing.JInternalFrame {
                                 boolean _check = detailService.addOrUpdateOrderDetail(detail);
                                 if (_check) {
                                     JOptionPane.showMessageDialog(null, "Chỉnh sửa thành công!");
-                                    List<OrderDetail> details = orderService.findOrderById(_orders.get(indexSelected).getId()).getDetails();
+                                    List<OrderDetail> details = orderService.findOrderById(_orders.get(indexSelected).getId().toString()).getDetails();
                                     loadDataToOrderDetailList(details);
 
                                     //get date

@@ -3,6 +3,8 @@ package service.impl;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
+import org.bson.types.ObjectId;
+
 import dao.ProductTypeDAO;
 import entity.ProductType;
 import service.IProductTypeService;
@@ -16,7 +18,7 @@ public class ProductTypeServiceImpl extends UnicastRemoteObject implements IProd
 	}
 	
 	@Override
-	public ProductType findProductTypeById(int id) throws Exception {
+	public ProductType findProductTypeById(String id) throws Exception {
 		return dao.findProductTypeById(id);
 	}
 
