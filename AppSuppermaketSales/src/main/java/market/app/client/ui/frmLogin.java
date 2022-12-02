@@ -169,7 +169,7 @@ public class frmLogin extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Bạn vui lòng nhập đầy đủ thông tin!", "Thông báo", JOptionPane.WARNING_MESSAGE);
             } else {
                 Account account = accountService.findAccountByUserName(userName);
-//                System.err.println(account);
+                System.err.println(account);
                 if (account != null) {
                     if (account.getStaff().getId().equals(userName) && account.getPassword().equals(password)) {
                         if (account.getStaff().isStatus()) {

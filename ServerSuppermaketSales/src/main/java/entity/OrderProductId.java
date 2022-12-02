@@ -3,18 +3,18 @@ package entity;
 import java.io.Serializable;
 import java.util.Objects;
 
-import jakarta.persistence.Embeddable;
+import javax.persistence.*;
+
+import org.bson.types.ObjectId;
 
 @Embeddable
 public class OrderProductId implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private int product;
-	private int order;
 
-	public OrderProductId(int product, int order) {
+	private static final long serialVersionUID = 1L;
+	private ObjectId product;
+	private ObjectId order;
+
+	public OrderProductId(ObjectId product, ObjectId order) {
 		super();
 		this.product = product;
 		this.order = order;
@@ -38,7 +38,7 @@ public class OrderProductId implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		OrderProductId other = (OrderProductId) obj;
-		return order == other.order && product == other.product;
+		return order.equals(other.order) && product.equals(other.product) ;
 	}
 
 }

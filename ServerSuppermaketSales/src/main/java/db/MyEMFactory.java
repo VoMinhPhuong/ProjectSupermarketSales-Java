@@ -1,10 +1,12 @@
 package db;
 
-import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.ogm.OgmSessionFactory;
+import org.hibernate.ogm.boot.OgmSessionFactoryBuilder;
+import org.hibernate.ogm.cfg.OgmProperties;
+import org.hibernate.service.ServiceRegistry;
 
 import entity.Account;
 import entity.Order;
@@ -15,12 +17,18 @@ import entity.ProductType;
 import entity.Staff;
 
 public class MyEMFactory {
-	private static MyEMFactory instance;
-	private SessionFactory sessionFactory;
+	private static MyEMFactory instance = null;
+//	private SessionFactory sessionFactory;
+	private OgmSessionFactory sessionFactory;
+	
+	
+	
+	private MyEMFactory() {
+		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySetting(OgmProperties.ENABLED, true)
+		        .configure().build();
 
-	StandardServiceRegistry standardRegistry = new StandardServiceRegistryBuilder().configure().build();
-
-	Metadata metadata = new MetadataSources(standardRegistry).addAnnotatedClass(Staff.class)
+		Metadata metadata = new MetadataSources(serviceRegistry)
+			.addAnnotatedClass(Staff.class)
 			.addAnnotatedClass(Account.class)
 			.addAnnotatedClass(ProductType.class)
 			.addAnnotatedClass(Product.class)
@@ -29,12 +37,11 @@ public class MyEMFactory {
 			.addAnnotatedClass(OrderProductId.class)
 			.addAnnotatedClass(OrderDetail.class)
 			.getMetadataBuilder().build();
-
-	private MyEMFactory() {
-		sessionFactory = metadata.getSessionFactoryBuilder().build();
+		
+		 sessionFactory = metadata.getSessionFactoryBuilder().unwrap(OgmSessionFactoryBuilder.class).build();
 	}
 
-	public synchronized static MyEMFactory getInstance() {
+	public static MyEMFactory getInstance() {
 		if (instance == null) {
 			instance = new MyEMFactory();
 		}
@@ -42,7 +49,7 @@ public class MyEMFactory {
 		return instance;
 	}
 
-	public SessionFactory getEntityManagerFactory() {
+	public OgmSessionFactory getEntityManagerFactory() {
 		return sessionFactory;
 	}
 }

@@ -15,7 +15,7 @@ public class ProductServiceImpl extends UnicastRemoteObject implements IProductS
 		this.dao = new ProductDAO();
 	}
 	@Override
-	public Product findProductById(int id) throws Exception {
+	public Product findProductById(String id) throws Exception {
 		return dao.findProductById(id);
 	}
 
@@ -27,9 +27,9 @@ public class ProductServiceImpl extends UnicastRemoteObject implements IProductS
 	}
 
 	@Override
-	public boolean deleteProduct(Product product) throws Exception {
+	public boolean deleteProduct(String productId) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.deleteProduct(product);
+		return dao.deleteProduct(productId);
 		
 	}
 	@Override
@@ -38,7 +38,7 @@ public class ProductServiceImpl extends UnicastRemoteObject implements IProductS
 		return dao.getAllProduct();
 	}
 	@Override
-	public List<Product> getAllProductByProductTypeId(int product_type_id) throws Exception {
+	public List<Product> getAllProductByProductTypeId(String product_type_id) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.getAllProductByProductTypeId(product_type_id);
 	}

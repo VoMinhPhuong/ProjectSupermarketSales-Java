@@ -1,42 +1,40 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import javax.persistence.*;
+
+import org.bson.types.ObjectId;
+import org.hibernate.mapping.Set;
 
 @Entity
 @Table(name = "orders")
 public class Order implements Serializable {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	@Id
 	@Column(name = "order_id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private ObjectId id;
 
 	@Column(name = "order_date", nullable = false)
 	private Date date;
-
+	
 	@ManyToOne
 	@JoinColumn(name = "staff_id", referencedColumnName = "staff_id")
 	private Staff staff;
-
-	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	List<OrderDetail> details;
+	
+	
+//	@OneToMany(mappedBy = "order",fetch = FetchType.LAZY)
+//	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+//	
+	@ElementCollection(fetch = FetchType.EAGER)
+//	@OneToMany(mappedBy = "order", targetEntity = OrderDetail.class)
+//	@CollectionTable(name = "order_details", joinColumns = @JoinColumn(name = "order"))
+	private List<OrderDetail> details;
 
 	public Order(Date date, Staff staff) {
 		super();
@@ -50,17 +48,20 @@ public class Order implements Serializable {
 
 	public double getTotal() {
 		double total = 0;
+		System.out.println("details" +details);
 		for (OrderDetail orderDetail : details) {
+			System.out.println("orderDetail.getTotalOrderDetail()"+orderDetail.getTotalOrderDetail());
 			total += orderDetail.getTotalOrderDetail();
 		}
+		System.out.println("total"+total);
 		return total;
 	}
 
-	public int getId() {
+	public ObjectId getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(ObjectId id) {
 		this.id = id;
 	}
 
@@ -90,7 +91,9 @@ public class Order implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Order [id=" + id + ", date=" + date + "]";
+		return "Order [id=" + id + ", date=" + date + ", staff=" + staff + ", details=" + details + "]";
 	}
+
+	
 
 }

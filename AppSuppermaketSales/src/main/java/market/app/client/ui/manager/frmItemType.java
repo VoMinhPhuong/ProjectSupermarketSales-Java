@@ -280,6 +280,7 @@ public class frmItemType extends javax.swing.JFrame {
         try {
             int i = 1;
             for (ProductType prod : productTypeService.getAllProductType()) {
+                System.out.println("prod" + prod);
                 Object[] obj = new Object[]{i++, prod.getName(), prod.getUnit()};
                 modelTableProductTypeList.addRow(obj);
             }
@@ -386,7 +387,7 @@ public class frmItemType extends javax.swing.JFrame {
         List<ProductType> list = new ArrayList<>();
         try {
             for (ProductType pt : productTypeService.getAllProductType()) {
-                ProductType productType = productTypeService.findProductTypeById(pt.getId());
+                ProductType productType = productTypeService.findProductTypeById(pt.getId().toString());
                 list.add(productType);
             }
 
@@ -476,11 +477,13 @@ public class frmItemType extends javax.swing.JFrame {
             if (selected >= 0) {
                 productType = getProductTypes().get(selected);
                 int choise = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa loại sản phẩm này không?", "Thông báo", JOptionPane.YES_NO_OPTION);
-
-                for (ProductType prod : productTypeService.getAllProductType()) {
-                    if (productType.getId() == prod.getId()) {
+                List<ProductType> types = productTypeService.getAllProductType();
+                if(types.size() > 0){
+                    for (ProductType prod : types) {
+                    if (productType.getId().toString().equals(prod.getId().toString()) ) {
                         if (choise == JOptionPane.YES_OPTION) {
                             productType.setSelling(false);
+                            System.out.println("productType" + productType);
                             productTypeService.addOrUpdateProductType(productType);
 
                             JOptionPane.showMessageDialog(this, "Xóa loại sản phẩm thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
@@ -489,6 +492,8 @@ public class frmItemType extends javax.swing.JFrame {
                         }
                     }
                 }
+                }
+                
             }
         } catch (Exception ex) {
             Logger.getLogger(frmItemType.class.getName()).log(Level.SEVERE, null, ex);

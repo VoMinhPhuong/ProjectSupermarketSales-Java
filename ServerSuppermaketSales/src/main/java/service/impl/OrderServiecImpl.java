@@ -3,6 +3,8 @@ package service.impl;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
+import org.bson.types.ObjectId;
+
 import dao.OrderDAO;
 import entity.Order;
 import service.IOrderService;
@@ -19,14 +21,14 @@ public class OrderServiecImpl extends UnicastRemoteObject implements IOrderServi
 
 
 	@Override
-	public Order findOrderById(int id) throws Exception {
+	public Order findOrderById(String id) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.findOrderById(id);
 	}
 
 
 	@Override
-	public int addOrUpdateOrder(Order order) throws Exception {
+	public ObjectId addOrUpdateOrder(Order order) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.addOrUpdateOrder(order);
 	}

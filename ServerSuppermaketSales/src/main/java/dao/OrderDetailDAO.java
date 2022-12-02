@@ -6,27 +6,29 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.ogm.OgmSessionFactory;
 
 import db.MyEMFactory;
+import entity.Order;
 import entity.OrderDetail;
+import entity.Product;
 import service.IOrderDetailService;
 
 public class OrderDetailDAO extends UnicastRemoteObject implements IOrderDetailService {
 	private static final long serialVersionUID = 1L;
-	private SessionFactory factory;
+	private OgmSessionFactory sessionFactory;
 
 	public OrderDetailDAO() throws Exception {
-		this.factory = MyEMFactory.getInstance().getEntityManagerFactory();
+		this.sessionFactory = MyEMFactory.getInstance().getEntityManagerFactory();
 	}
 
 	@Override
 	public OrderDetail findOrderDetailById(int order_id, int product_id) throws Exception {
-		Session session = factory.openSession();
+		Session session = sessionFactory.openSession();
 		try {
 			OrderDetail orderDetail = session
-					.createNativeQuery("SELECT * " + "FROM order_details "
-							+ "WHERE order_id = :order_id and product_id = :product_id", OrderDetail.class)
-					.setParameter("order_id", order_id).setParameter("product_id", product_id).getSingleResultOrNull();
+					.createNativeQuery("db.order_details.find({order_id: '"+order_id+"', product_id: '"+product_id+"'})",
+							OrderDetail.class).getSingleResult();
 			return orderDetail;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -37,7 +39,7 @@ public class OrderDetailDAO extends UnicastRemoteObject implements IOrderDetailS
 	@SuppressWarnings("deprecation")
 	@Override
 	public boolean addOrUpdateOrderDetail(OrderDetail orderDetail) throws Exception {
-		Session session = factory.getCurrentSession();
+		Session session = sessionFactory.getCurrentSession();
 		Transaction transaction = session.getTransaction();
 		try {
 			transaction.begin();
@@ -55,7 +57,7 @@ public class OrderDetailDAO extends UnicastRemoteObject implements IOrderDetailS
 	@SuppressWarnings("deprecation")
 	@Override
 	public boolean deleteOrderDetail(OrderDetail orderDetail) throws Exception {
-		Session session = factory.getCurrentSession();
+		Session session = sessionFactory.getCurrentSession();
 		Transaction transaction = session.getTransaction();
 		try {
 			transaction.begin();
@@ -72,10 +74,9 @@ public class OrderDetailDAO extends UnicastRemoteObject implements IOrderDetailS
 
 	@Override
 	public List<OrderDetail> getAllOrderDetail() throws Exception {
-		Session session = factory.openSession();
+		Session session = sessionFactory.openSession();
 		try {
-			List<OrderDetail> entities = session
-					.createNativeQuery("SELECT * " + "FROM order_details ", OrderDetail.class).list();
+			List<OrderDetail> entities = session.createNativeQuery("db.order_details.find({})", OrderDetail.class).list();
 			return entities;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -85,12 +86,11 @@ public class OrderDetailDAO extends UnicastRemoteObject implements IOrderDetailS
 
 	@Override
 	public List<OrderDetail> getAllByOrderId(int order_id) throws Exception {
-		Session session = factory.openSession();
+		Session session = sessionFactory.openSession();
 		try {
 			List<OrderDetail> entities = session
-					.createNativeQuery("SELECT * " + "FROM order_details " + "WHERE order_id = :order_id",
-							OrderDetail.class)
-					.setParameter("order_id", order_id).list();
+					.createNativeQuery("db.order_details.find({order_id: '"+order_id+"'})",
+							OrderDetail.class).list();
 			return entities;
 		} catch (Exception e) {
 			e.printStackTrace();

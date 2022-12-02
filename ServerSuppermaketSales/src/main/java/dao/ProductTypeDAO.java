@@ -3,9 +3,11 @@ package dao;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
+import org.bson.types.ObjectId;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.ogm.OgmSessionFactory;
 
 import db.MyEMFactory;
 import entity.Product;
@@ -14,7 +16,7 @@ import service.IProductTypeService;
 
 public class ProductTypeDAO extends UnicastRemoteObject implements IProductTypeService {
 	private static final long serialVersionUID = 1L;
-	private SessionFactory factory;
+	private OgmSessionFactory factory;
 
 	public ProductTypeDAO() throws Exception {
 		super();
@@ -22,13 +24,12 @@ public class ProductTypeDAO extends UnicastRemoteObject implements IProductTypeS
 	}
 
 	@Override
-	public ProductType findProductTypeById(int id) throws Exception {
+	public ProductType findProductTypeById(String id) throws Exception {
 		Session session = factory.openSession();
 		try {
 			ProductType productType = session
-					.createNativeQuery("SELECT * FROM product_types where selling != 0 and product_type_id = :id",
-							ProductType.class)
-					.setParameter("id", id).getSingleResult();
+					.createNativeQuery("db.product_types.find({_id: ObjectId('"+id+"'), selling: true})",
+							ProductType.class).getSingleResult();
 			return productType;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -41,10 +42,8 @@ public class ProductTypeDAO extends UnicastRemoteObject implements IProductTypeS
 		Session session = factory.openSession();
 		try {
 			List<ProductType> listProductType = session
-					.createNativeQuery("SELECT * FROM product_types where selling != 0 and type_name like :name",
-							ProductType.class)
-					.setParameter("name", name)
-					.list();
+					.createNativeQuery("db.product_types.find({type_name: '"+name+"', selling: true})",
+							ProductType.class).list();
 			return listProductType;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -58,7 +57,7 @@ public class ProductTypeDAO extends UnicastRemoteObject implements IProductTypeS
 		Transaction transaction = session.getTransaction();
 		try {
 			transaction.begin();
-			session.merge(productType);
+			session.saveOrUpdate(productType);
 			transaction.commit();
 			return true;
 		} catch (Exception e) {
@@ -93,7 +92,7 @@ public class ProductTypeDAO extends UnicastRemoteObject implements IProductTypeS
 		Session session = factory.openSession();
 		try {
 			List<ProductType> productTypes = session
-					.createNativeQuery("SELECT * FROM product_types where selling != 0", ProductType.class).list();
+					.createNativeQuery("db.product_types.find({selling: true})", ProductType.class).list();
 			return productTypes;
 		} catch (Exception e) {
 			e.printStackTrace();
